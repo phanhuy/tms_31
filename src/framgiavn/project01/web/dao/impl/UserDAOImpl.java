@@ -18,16 +18,29 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 	}
 
 	@Override
-	public User findByUserId(Integer user_id) throws Exception {
-		return findByUserId(user_id, false);
+	public User findById(Integer id) throws Exception {
+		return findById(id, false);
 	}
 
-	public User findByUserId(Integer user_id, boolean lock) throws Exception {
+	public User findById(Integer id, boolean lock) throws Exception {
 		try {
-			Query query = getSession().getNamedQuery("User.SelectUserByUserId");
+			Query query = getSession().getNamedQuery("User.SelectUserById");
 			if (lock)
 				query.setLockMode("User", LockMode.UPGRADE);
-			query.setParameter("user_id", user_id);
+			query.setParameter("id", id);
+			return (User) query.uniqueResult();
+		} catch (RuntimeException re) {
+			log.error("get failed", re);
+			throw re;
+		}
+	}
+
+
+	@Override
+	public User findByName(String name) throws Exception {
+		try {
+			Query query = getSession().getNamedQuery("User.SelectByName");
+			query.setParameter("name", name);
 			return (User) query.uniqueResult();
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -36,9 +49,14 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 	}
 
 	@Override
-	public User findByUsername(String username) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+	public User findByEmail(String email) throws Exception {
+		try {
+			Query query = getSession().getNamedQuery("User.SelectByEmail");
+			query.setParameter("email", email);
+			return (User) query.uniqueResult();
+		} catch (RuntimeException re) {
+			log.error("get failed", re);
+			throw re;
+		}
 	}
-
 }

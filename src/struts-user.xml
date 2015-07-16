@@ -4,20 +4,26 @@
 "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-
 	<!-- Configure NameSpace for action web -->
-	<package name="User" namespace="/user" extends="default-web">
-		<action name="findByUserId*" class="springUserAction" method="findByUserId">
-			<param name="user.user_id">{1}</param>
+	<package name="User" namespace="/users" extends="default-web">
+		<action name="/*" class="springUserAction" method="findUserById">
+			<param name="user.id">{1}</param>
 			<result name="success">User.Info</result>
 			<result name="input">User.Info</result>
 			<result name="error">User.Info</result>
+			<result name="login">User.Info</result>
 		</action>
-
-		<action name="findByUsername*" class="springUserAction" method="findByUsername">
-			<param name="user.username">{1}</param>
+	</package>
+	<package name="Session" extends="default-web">
+		<action name="login">
+			<result>User.login</result>
+		</action>
+		<action name="dologin" class="springUserAction" method="dologin">
 			<result name="success">User.Info</result>
-			<result name="error">User.Info</result>
+			<result name="error">User.login</result>
+		</action>
+		<action name="logout" class="springUserAction" method="logout">
+			<result name="success">User.login</result>
 		</action>
 	</package>
 </struts>

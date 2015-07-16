@@ -9,5 +9,4 @@
 		scope="prototype">
 		<property name="userBusiness" ref="UserBusiness" />
 	</bean>
-
 </beans>

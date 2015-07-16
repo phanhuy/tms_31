@@ -1,13 +1,24 @@
 package framgiavn.project01.web.business.impl;
 
+import java.util.Date;
+import java.util.Map;
+
+import com.opensymphony.xwork2.ActionContext;
+
 import framgiavn.project01.web.business.UserBusiness;
 import framgiavn.project01.web.dao.UserDAO;
 import framgiavn.project01.web.model.User;
+import framgiavn.project01.web.ulti.Helpers;
+import org.hibernate.LockMode;
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
-public class UserBusinessImpl implements UserBusiness {
+
+public class UserBusinessImpl  implements UserBusiness  {
 
 	private UserDAO userDAO;
 
+	private Map session;
+	
 	public UserDAO getUserDAO() {
 		return userDAO;
 	}
@@ -16,24 +27,46 @@ public class UserBusinessImpl implements UserBusiness {
 		this.userDAO = userDAO;
 	}
 
-	@Override
-	public User findByUserId(Integer user_id) throws Exception {
+	
+	public User findById(Integer id) throws Exception {
 		try {
-			return getUserDAO().findByUserId(user_id);
+			return getUserDAO().findById(id);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
 		}
 	}
 
-	@Override
-	public User findByUsername(String username) throws Exception {
+	
+	public User findByName(String name) throws Exception {
 		try {
-			return getUserDAO().findByUsername(username);
+			return getUserDAO().findByName(name);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
 		}
 	}
 
+	public User findByEmail(String email) throws Exception {
+		try {
+			return getUserDAO().findByEmail(email);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
+
+	public User login(String email, String pass) throws Exception {
+		if (pass.equals("") || email.equals("")) {			
+			return null;									
+		}						
+		//getSession().lock("User", LockMode.UPGRADE);	
+		
+		User user = getUserDAO().findByEmail(email);
+		if (user != null && user.getPassword().equals(Helpers.encryptMd5(pass))) {										
+			return user;
+		}
+		return null;
+	}
 }
