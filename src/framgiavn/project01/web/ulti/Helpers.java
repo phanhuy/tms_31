@@ -5,8 +5,11 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -249,6 +252,25 @@ public final class Helpers {
 		} catch (Exception e) {
 			return null;
 		}
+	}
+	public static String encryptMd5(String plainPass) {		
+		byte[] bytesOfMessage;
+		try {
+			bytesOfMessage = plainPass.getBytes("UTF-8");
+			MessageDigest md = MessageDigest.getInstance("MD5");
+			byte[] thedigest = md.digest(bytesOfMessage);			
+			StringBuffer sb = new StringBuffer();
+			for (int i = 0; i < thedigest.length; i++) {
+				sb.append(Integer.toString((thedigest[i] & 0xff) + 0x100, 16)
+						.substring(1));
+			}
+			
+			return sb.toString();
+		} catch (UnsupportedEncodingException | NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "";
 	}
 
 }

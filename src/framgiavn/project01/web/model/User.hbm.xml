@@ -16,16 +16,16 @@
             <column name="email" length="50" />
         </property>
         <property name="suppervisor" type="java.lang.Integer">
-            <column name="suppervisor" length="128" />
+            <column name="suppervisor"  />
         </property>
         <property name="password" type="java.lang.String">
             <column name="password" length="50" />
         </property>              
         <property name="create_at" type="java.util.Date">
-            <column name="create_at" length="50" />
+            <column name="create_at"/>
         </property>
         <property name="update_at" type="java.util.Date">
-            <column name="update_at" length="50" />
+            <column name="update_at"/>
         </property>   
     </class>
 
@@ -34,7 +34,16 @@
     	from User user
     	where user.id = :id
     </query>
-    
+    <query name="User.SelectByName">
+		select user
+		from User user
+		where user.name = :name
+	</query>
+	<query name="User.SelectByEmail">
+		select user
+		from User user
+		where user.email = :email
+	</query>
     <query name="User.SelectAll">
     	select user  
     	from User user
