@@ -6,7 +6,7 @@ import framgiavn.project01.web.model.*;
 
 public interface CourseBusiness {
 	
-	List<Course> listCourse();
+	List<Course> listCourse(TakeCourseBusiness takeCourseBusiness);	
 	
 	List<Subject> listSubjectInCourse();
 	

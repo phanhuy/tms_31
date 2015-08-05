@@ -15,6 +15,7 @@
 		scope="prototype">
 		<property name="courseBusiness" ref="CourseBusiness" />
 		<property name="subjectBusiness" ref="SubjectBusiness" />
+		<property name="takeCourseBusiness" ref="TakeCourseBusiness" />		
 	</bean>
 	
 	<!-- ================== SUBJECT MODULE ================== -->

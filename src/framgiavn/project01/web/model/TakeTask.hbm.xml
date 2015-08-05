@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="framgiavn.project01.web.model.TakeTask" table="take_tasks"
+		dynamic-insert="true" dynamic-update="true">
+		<composite-id class="framgiavn.project01.web.model.TakeTask" mapped="true">
+			<key-property name="userId" type="java.lang.Integer" column="user_id" />
+			<key-property name="taskId" type="java.lang.Integer" column="task_id" />
+		</composite-id>
+	
+		<property name="finished" type="java.lang.Integer">
+			<column name="finished" length="1" />
+		</property>
+		<property name="createAt" type="java.util.Date">
+			<column name="create_at" length="50" />
+		</property>
+		<property name="updateAt" type="java.util.Date">
+			<column name="update_at" length="50" />
+		</property>
+	</class>
+	<query name="TakeTask.SelectTasksById">
+		select task
+		from TakeTask task
+		where task.userId = :userId AND
+		 task.taskId = :taskId
+	</query>
+	<query name="TakeTask.SelectTasksByUser">
+		select task
+		from TakeTask task
+		where task.userId = :userId
+	</query>
+	<query name="TakeTask.SelectTakeTask">
+		select taketask
+		from TakeTask taketask
+		where taketask.taskId = :taskId AND
+		taketask.userId = :userId
+	</query>
+</hibernate-mapping>

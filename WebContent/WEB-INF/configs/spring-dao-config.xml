@@ -8,6 +8,17 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
+	
+	<bean id="TakeCourseDAO" class="framgiavn.project01.web.dao.impl.TakeCourseDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="TakeTaskDAO" class="framgiavn.project01.web.dao.impl.TakeTaskDAOImpl">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
 
 	<bean name="CourseDAO" class="framgiavn.project01.web.dao.impl.CourseDAOImpl">
 		<property name="sessionFactory">
@@ -21,13 +32,17 @@
 	</bean>
 
 	<bean name="SubjectCourseDAO" class="framgiavn.project01.web.dao.impl.SubjectCourseDAOImpl">
+
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
+	
 	<bean name="TaskDAO" class="framgiavn.project01.web.dao.impl.TaskDAOImpl">
+
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
+	
 </beans>

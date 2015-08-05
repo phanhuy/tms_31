@@ -7,6 +7,10 @@ import java.util.Set;
 
 public class Course implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private String name;
 	private String detail;
@@ -14,7 +18,7 @@ public class Course implements Serializable {
 	private Date endDate;
 
 	private List<Integer> listSubjectId;
-	
+	private List<SubjectCourse> subjectCourses;
 	
 	public List<Integer> getListSubjectId() {
 		return listSubjectId;
@@ -22,8 +26,17 @@ public class Course implements Serializable {
 	public void setListSubjectId(List<Integer> listSubjectId) {
 		this.listSubjectId = listSubjectId;
 	}
+
+	private List<TakeCourse> takeCourses;
+
+	public List<TakeCourse> getTakeCourses() {
+		return takeCourses;
+	}
 	
-	private List<SubjectCourse> subjectCourses;
+	public void setTakeCourses(List<TakeCourse> takeCourses) {
+		this.takeCourses = takeCourses;
+	}
+
 
 	public List<SubjectCourse> getSubjectCourses() {
 		return subjectCourses;

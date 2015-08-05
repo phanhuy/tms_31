@@ -8,6 +8,8 @@ public interface CourseDAO {
 
 	public List<Course> listCourse();
 	
+	public List<Course> listUsersCourse(Integer userId);
+	
 	public Course findById( Integer id, boolean lock) throws Exception;
 	
 	public void addCourse(Course course);

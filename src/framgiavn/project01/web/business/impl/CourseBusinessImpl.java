@@ -3,17 +3,25 @@ package framgiavn.project01.web.business.impl;
 import framgiavn.project01.web.model.*;
 import framgiavn.project01.web.dao.*;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+
+import com.opensymphony.xwork2.ActionContext;
 
 import framgiavn.project01.web.business.CourseBusiness;
+import framgiavn.project01.web.business.TakeCourseBusiness;
 
 public class CourseBusinessImpl implements CourseBusiness {
 
 	private CourseDAO courseDAO;
 	private SubjectDAO subjectDAO;
 	private SubjectCourseDAO subjectCourseDAO;
+	private TakeCourseDAO takeCourseDAO;
+	private Map<String, Object> session;
 
+	
 	public SubjectCourseDAO getSubjectCourseDAO() {
 		return subjectCourseDAO;
 	}
@@ -39,9 +47,33 @@ public class CourseBusinessImpl implements CourseBusiness {
 	}
 
 	@Override
-	public List<Course> listCourse() {
-		return courseDAO.listCourse();
+	public List<Course> listCourse(TakeCourseBusiness takeCourseBusiness) {
+		
+		List<Course> courseList = new ArrayList<Course>();
+		List<Course> courses = new ArrayList<Course>();
+		courseList = courseDAO.listCourse(); 
+		session = ActionContext.getContext().getSession();
+		User currentUser = (User) session.get("currentUser");		
+		
+		
+		if(currentUser.getSuppervisor()!=1)			
+		{					
+			for(Course course:courseList){
+				System.out.println(takeCourseBusiness);
+				for(TakeCourse t : takeCourseBusiness.selectTakeCourseByUserId(currentUser.getId())){
+					if(course.getId().equals(t.getCourse_id())){
+						System.out.println("abc");
+						courses.add(course);
+						continue;
+					}										
+				}								
+			}	
+			courseList = courses;
+		}		
+		System.out.println(courseList.size());
+		return courseList;
 	}
+	
 
 	@Override
 	public Course findById(Integer id) throws Exception {
@@ -99,6 +131,14 @@ public class CourseBusinessImpl implements CourseBusiness {
 	@Override
 	public void removeSubjectCourse(Integer subject_id, Integer course_id) {
 		subjectCourseDAO.removeSubjectFromCourse(subject_id, course_id);
+	}
+
+	public TakeCourseDAO getTakeCourseDAO() {
+		return takeCourseDAO;
+	}
+
+	public void setTakeCourseDAO(TakeCourseDAO takeCourseDAO) {
+		this.takeCourseDAO = takeCourseDAO;
 	}
 
 

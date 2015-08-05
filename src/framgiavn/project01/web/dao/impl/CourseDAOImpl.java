@@ -31,6 +31,17 @@ public class CourseDAOImpl extends HibernateDaoSupport implements CourseDAO {
 			throw re;
 		}
 	}
+	
+	@Override
+	public List<Course> listUsersCourse(Integer userId) {
+		try{
+			Query query = getSession().getNamedQuery("Course.SelectCourseAll");
+			return query.list();
+		} catch (RuntimeException re) {
+			log.error("List all course error!", re);
+			throw re;
+		}		
+	}	
 
 	public Course findById(Integer id, boolean lock) throws Exception {
 		try {
@@ -80,6 +91,7 @@ public class CourseDAOImpl extends HibernateDaoSupport implements CourseDAO {
 			throw re;
 		}
 		
-	}	
+	}
+	
 
 }

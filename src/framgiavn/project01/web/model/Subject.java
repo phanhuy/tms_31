@@ -2,7 +2,7 @@ package framgiavn.project01.web.model;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Set;
+
 
 public class Subject implements Serializable {
 	
@@ -10,11 +10,11 @@ public class Subject implements Serializable {
 	private String name;
 	private String detail;
 	private List<SubjectCourse> subjectCourses;
+
 	private List<Task> tasks;
 	private List<String> listTaskName;
 	private List<String> listTaskDetail;
 	private List<Integer> listTaskID;
-	
 	
 	public List<SubjectCourse> getSubjectCourses() {
 		return subjectCourses;

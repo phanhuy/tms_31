@@ -13,6 +13,8 @@ public class Task implements Serializable {
 	private Integer subject_id;
 	private Subject subjects;
 
+	private Integer userFinished;
+
 	public Integer getId() {
 		return id;
 	}
@@ -53,4 +55,11 @@ public class Task implements Serializable {
 		this.subject_id = subject_id;
 	}
 
+	public Integer getUserFinished() {
+		return userFinished;
+	}
+
+	public void setUserFinished(Integer userFinished) {
+		this.userFinished = userFinished;
+	}
 }

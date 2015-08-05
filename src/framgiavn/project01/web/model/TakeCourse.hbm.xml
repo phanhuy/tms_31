@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="framgiavn.project01.web.model.TakeCourse" table="take_courses" 
+		dynamic-insert="true" dynamic-update="true">
+		<composite-id class="framgiavn.project01.web.model.TakeCourse" mapped="true">
+			<key-property name="user_id" type="java.lang.Integer" column="user_id" />
+			<key-property name="course_id" type="java.lang.Integer" column="course_id" />
+		</composite-id>
+		<many-to-one name="users" class="framgiavn.project01.web.model.User" lazy="false">
+			<column name="user_id" not-null="false" />
+		</many-to-one>
+		<many-to-one name="courseUser" class="framgiavn.project01.web.model.Course" lazy="false">
+			<column name="course_id" not-null="false" />
+		</many-to-one>
+		<property name="finished" type="java.lang.Integer">
+            <column name="finished" length="1"/>
+        </property>
+		<property name="createAt" type="java.util.Date">
+            <column name="created_at" length="50" />
+        </property>
+        <property name="updateAt" type="java.util.Date">
+            <column name="updated_at" length="50" />
+        </property>
+	</class>
+	<query name="TakeCourse.SelectCoursesByUser">
+    	select course  
+    	from TakeCourse course
+    	where course.user_id = :user_id
+    </query>
+	<query name="TakeCourse.DeleteRow">
+    	delete from TakeCourse takeCourse 
+    	where (takeCourse.user_id=:user_id and takeCourse.course_id=:course_id)
+    </query>
+</hibernate-mapping>

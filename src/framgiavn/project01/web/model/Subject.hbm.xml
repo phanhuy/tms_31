@@ -16,6 +16,7 @@
         </property>
         
         <bag name="subjectCourses" inverse="true" lazy="false" cascade="all"
+
         	table="subjects_courses" fetch="select" >
         	<key column="subject_id" not-null="true" />
             <one-to-many class="framgiavn.project01.web.model.SubjectCourse" />
@@ -25,7 +26,9 @@
         	table="tasks" fetch="select">
         	<key column="subject_id" not-null="true" />
             <one-to-many class="framgiavn.project01.web.model.Task" />
+
         </bag>       
+
 	</class>
 	<query name="SubjectCourse.SelectSCById">
     	select subject  

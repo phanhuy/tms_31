@@ -2,8 +2,9 @@ package framgiavn.project01.web.action;
 
 import java.util.Date;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 import framgiavn.project01.web.business.*;
@@ -11,12 +12,19 @@ import framgiavn.project01.web.model.*;
 
 public class CourseAction extends ActionSupport {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	CourseBusiness courseBusiness;
 	SubjectBusiness subjectBusiness;
+	TakeCourseBusiness takeCourseBusiness; 
+	
 	Course course;
 
 	Subject subject;
 	SubjectCourse subjectCourse;
+	private Map<String, Object> session;
 	public List<Course> courseList = new ArrayList<Course>();
 	public List<Subject> subjectList = new ArrayList<Subject>();
 	public List<Subject> subjectCourseList = new ArrayList<Subject>();
@@ -24,6 +32,9 @@ public class CourseAction extends ActionSupport {
 	
 	public void setSubjectBusiness(SubjectBusiness subjectBusiness) {
 		this.subjectBusiness = subjectBusiness;
+	}
+	public void setTakeCourseBusiness(TakeCourseBusiness takeCourseBusiness) {
+		this.takeCourseBusiness = takeCourseBusiness;
 	}
 	public List<Subject> getSubjectCourseList() {
 		return subjectCourseList;
@@ -71,9 +82,10 @@ public class CourseAction extends ActionSupport {
 		this.courseList = courseList;
 	}
 	
-	public String listAllCourse() {		
-		courseList = courseBusiness.listCourse();
+
+	public String listAllCourse() {						
 		
+		courseList = courseBusiness.listCourse(takeCourseBusiness);		
 		return SUCCESS;
 	}
 	
@@ -90,7 +102,7 @@ public class CourseAction extends ActionSupport {
 		course.setStartDate(new Date());
 		courseBusiness.addCourse(course);
 		courseList = null;
-		courseList = courseBusiness.listCourse();
+		courseList = courseBusiness.listCourse(takeCourseBusiness);
 		
 		return SUCCESS;
 	}
@@ -98,7 +110,7 @@ public class CourseAction extends ActionSupport {
 	public String updateCourse() throws Exception {
 		courseBusiness.updateCourse(course);
 		courseList = null;
-		courseList = courseBusiness.listCourse();
+		courseList = courseBusiness.listCourse(takeCourseBusiness);
 		
 		return SUCCESS;
 	}
@@ -106,7 +118,7 @@ public class CourseAction extends ActionSupport {
 	public String destroyCourse() {
 		courseBusiness.deleteCourse(course.getId());
 		courseList = null;
-		courseList = courseBusiness.listCourse();
+		courseList = courseBusiness.listCourse(takeCourseBusiness);
 		
 		return SUCCESS;
 	}
@@ -141,4 +153,3 @@ public class CourseAction extends ActionSupport {
 		return SUCCESS;
 	}
 }
-

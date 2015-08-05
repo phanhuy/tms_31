@@ -22,9 +22,15 @@
         </property>   
         
         <bag name="subjectCourses" inverse="true" lazy="false" cascade="all"
-        	table="subjects_courses" fetch="select" >
+        	table="subjects_courses" fetch="join" >
         	<key column="course_id" not-null="true" />
             <one-to-many class="framgiavn.project01.web.model.SubjectCourse" />
+        </bag> 
+        <bag name="takeCourses" table="take_courses" inverse="true" cascade="all"
+        	lazy="false" fetch="select">
+            <key column="course_id" not-null="true" />
+            <one-to-many class="framgiavn.project01.web.model.TakeCourse" />
+
         </bag> 
 	</class>
 	
@@ -42,4 +48,5 @@
     <query name="Course.DeleteCourseById">
     	delete from Course course where course.id = :id
     </query>
+    
 </hibernate-mapping>

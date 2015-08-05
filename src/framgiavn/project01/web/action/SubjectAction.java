@@ -1,13 +1,24 @@
 package framgiavn.project01.web.action;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
+import java.util.Set;
 import com.opensymphony.xwork2.ActionSupport;
 import framgiavn.project01.web.business.*;
 import framgiavn.project01.web.model.Subject;
 import framgiavn.project01.web.model.Task;
+import java.util.Map;
+
+import com.opensymphony.xwork2.ActionContext;
+import com.opensymphony.xwork2.ActionSupport;
+import framgiavn.project01.web.business.*;
+import framgiavn.project01.web.model.Subject;
+import framgiavn.project01.web.model.TakeTask;
+import framgiavn.project01.web.model.Task;
+import framgiavn.project01.web.model.User;
+
 
 public class SubjectAction extends ActionSupport {
 
@@ -18,6 +29,19 @@ public class SubjectAction extends ActionSupport {
 	SubjectBusiness subjectBusiness;
 	TaskBusiness taskBusiness;
 	Subject subject;
+
+	TakeTask takeTask;
+	private Map<String, Object> session;
+	
+	
+	public TakeTask getTakeTask() {
+		return takeTask;
+	}
+
+	public void setTakeTask(TakeTask takeTask) {
+		this.takeTask = takeTask;
+	}
+
 
 	public void setTaskBusiness(TaskBusiness taskBusiness) {
 		this.taskBusiness = taskBusiness;
@@ -51,9 +75,9 @@ public class SubjectAction extends ActionSupport {
 		return SUCCESS;
 	}
 
-	public String showSubject() {
-		try {
-			subject = subjectBusiness.findById(subject.getId());
+	public String showSubject() {						
+		try {			
+			subject = subjectBusiness.findById(subject.getId());						
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -114,7 +138,12 @@ public class SubjectAction extends ActionSupport {
 	}
 
 	public String destroySubject() {
-		subjectBusiness.deleteSubject(subject.getId());
+		try {
+			subjectBusiness.deleteSubject(subject.getId());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		subjectList = null;
 		subjectList = subjectBusiness.listSubject();
 
@@ -129,4 +158,17 @@ public class SubjectAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
+
+	
+	public  String takeTask() throws Exception{
+		takeTask.setCreateAt(new Date());		
+		subjectBusiness.addUserTakeTask(takeTask);
+		return SUCCESS;
+	}
+	
+	public  String updateTask() throws Exception{
+		subjectBusiness.updateUserTakeTask(takeTask);		
+		return SUCCESS;
+	}
+
 }

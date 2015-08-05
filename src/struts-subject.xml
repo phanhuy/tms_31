@@ -36,5 +36,16 @@
 			<param name="subject.id">{1}</param>
 		    <result>Subject.Update</result>
 		</action>
+		
+		<action name="takeTask" class="springSubjectAction" method="takeTask">
+		    <result name="success" type="redirect">
+		    	<param name="location">/subjects/detail${takeTask.subjectId}</param>
+		    </result>
+		</action>
+		<action name="updateTask" class="springSubjectAction" method="updateTask">
+		    <result name="success" type="redirect">
+		    	<param name="location">/subjects/detail${takeTask.subjectId}</param>
+		    </result>
+		</action>
 	</package>
 </struts>

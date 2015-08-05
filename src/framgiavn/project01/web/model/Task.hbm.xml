@@ -17,6 +17,7 @@
 		<many-to-one name="subjects" class="framgiavn.project01.web.model.Subject"
 			fetch="join">
 			<column name="subject_id" not-null="true" />
+
 		</many-to-one>
 	</class>
 	<query name="Task.SelectTaskById">

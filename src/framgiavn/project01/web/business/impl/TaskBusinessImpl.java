@@ -8,7 +8,7 @@ import framgiavn.project01.web.model.Task;
 
 class TaskBusinessImpl implements TaskBusiness {
 	
-	private TaskDAO taskDAO;
+	private TaskDAO taskDAO;	
 
 	public TaskDAO getTaskDAO() {
 		return taskDAO;

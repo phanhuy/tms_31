@@ -44,6 +44,9 @@
 				<value>framgiavn/project01/web/model/Subject.hbm.xml</value>
 				<value>framgiavn/project01/web/model/SubjectCourse.hbm.xml</value>
 				<value>framgiavn/project01/web/model/Task.hbm.xml</value>
+				<value>framgiavn/project01/web/model/TakeCourse.hbm.xml</value>
+				<value>framgiavn/project01/web/model/TakeTask.hbm.xml</value>
+
 			</list>
 		</property>
 
