@@ -40,4 +40,21 @@
 		<put-list-attribute name="css">
 		</put-list-attribute>
 	</definition>
+	
+	<definition name="UserImage" extends="Default.Web">
+		<put-attribute name="body" value="/upload-download/UserImage.jsp" />
+		<put-list-attribute name="js">
+		</put-list-attribute>
+		<put-list-attribute name="css">
+		</put-list-attribute>
+	</definition>
+	
+	<definition name="SuccessUserImage" extends="Default.Web">
+		<put-attribute name="body" value="/upload-download/SuccessUserImage.jsp" />
+		<put-list-attribute name="js">
+		</put-list-attribute>
+		<put-list-attribute name="css">
+		</put-list-attribute>
+	</definition>
+	
 </tiles-definitions>

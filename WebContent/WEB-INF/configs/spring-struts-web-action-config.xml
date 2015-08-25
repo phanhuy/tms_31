@@ -29,4 +29,10 @@
 		scope="prototype">
 		<property name="taskBusiness" ref="TaskBusiness" />
 	</bean>
+	
+	<!-- ================== OTHER MODULE ================== -->
+	<bean id="springOtherAction" class="framgiavn.project01.web.action.FileUploadAction"
+		scope="prototype">		
+	</bean>
+	
 </beans>

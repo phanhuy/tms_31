@@ -42,6 +42,7 @@
         	,/WEB-INF/configs/tiles-defs-user.xml
         	,/WEB-INF/configs/tiles-defs-course.xml
         	,/WEB-INF/configs/tiles-defs-subject.xml
+        	,/WEB-INF/configs/tiles-defs-other.xml
         </param-value>
 	</context-param>
 	<!-- Define Tiles configuration files -->
@@ -66,5 +67,4 @@
 		<session-timeout>30</session-timeout>
 		<tracking-mode>COOKIE</tracking-mode>
 	</session-config>
-
 </web-app>

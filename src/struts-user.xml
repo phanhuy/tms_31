@@ -46,6 +46,10 @@
 		<action name="" class="springUserAction" method="viewAll">			
 			<result name="success">User.all</result>
 		</action>
+		
+		<action name="UploadServlet" class="springUserAction" method="UploadServletImpl">		
+		</action>
+		
 	</package>
 	<package name="Session" extends="default-web">
 		<action name="login">

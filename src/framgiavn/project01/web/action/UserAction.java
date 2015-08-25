@@ -151,4 +151,7 @@ public class UserAction extends ActionSupport {
 		}						
 		return SUCCESS;
 	}
+	
+	public void UploadServletImpl(){					
+	}
 }
